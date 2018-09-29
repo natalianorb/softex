@@ -5,12 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    contactForm: {
+      name: 'Fill Murray',
+      phone: '',
+      message: ''
+    }
   },
   mutations: {
-
-  },
-  actions: {
-
+    updateContactForm(state, payload) {
+      state.contactForm = payload;
+    } 
   }
 })

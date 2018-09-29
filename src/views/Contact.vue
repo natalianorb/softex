@@ -7,7 +7,6 @@
         <v-text-field
           v-model="name"
           :rules="nameRules"
-          :counter="10"
           label="Name"
           required
         ></v-text-field>
@@ -22,6 +21,7 @@
           v-model="message"
           :rules="messageRules"
           label="Message"
+          :counter="250"
           required
         ></v-textarea>
         <v-btn
@@ -37,26 +37,30 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    valid: true,
-    name: '',
-    nameRules: [
-      v => !!v || 'Name is required',
-      v => (v && v.length > 2) || 'Name must be more than 2 characters'
-    ],
-    phone: '',
-    phoneRules: [
-      v => !!v || 'Phone is required',
-      v => /^((\+7|7|8)+([0-9]){10})$/.test(v) || 'Phone number must be valid'
-    ],
-    message: '',
-    messageRules: [
-      v => !!v || 'Message is required',
-      v => (v && v.length <= 250) || 'Name must be less than 250 characters'
-    ],
-  }),
+import store from '../store.js';
 
+export default {
+  store,
+  data() {
+    return {
+      valid: true,
+      name: this.$store.state.contactForm.name,
+      nameRules: [
+        v => !!v || 'Name is required',
+        v => (v && v.length > 2) || 'Name must be more than 2 characters'
+      ],
+      phone: '',
+      phoneRules: [
+        v => !!v || 'Phone is required',
+        v => /^((\+7|7|8)+([0-9]){10})$/.test(v) || 'Phone number must be valid'
+      ],
+      message: '',
+      messageRules: [
+        v => !!v || 'Message is required',
+        v => (v && v.length <= 250) || 'Name must be less than 250 characters'
+      ]
+    }
+  },
   methods: {
     submit () {
       if (this.valid) {
@@ -78,10 +82,15 @@ export default {
           }
           throw new Error(resp.statusText);          
         })
-          //eslint-disable-next-line
+        //eslint-disable-next-line
         .then(body => {
+          this.$store.commit('updateContactForm', {
+            name: this.name,
+            phone: this.phone,
+            message: this.message
+          });
         })
-          //eslint-disable-next-line
+        //eslint-disable-next-line
         .catch(error => {
         });
       }
