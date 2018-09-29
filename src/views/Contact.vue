@@ -1,6 +1,6 @@
 <template>
 <div class="contact">
-  <div class="contact__header">Contact Form</div>
+  <h1 class="contact__header">Contact Form</h1>
   <div class="contact__body">
     <v-flex xs12 sm9 md6>    
       <v-form v-model="valid" >

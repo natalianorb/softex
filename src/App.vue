@@ -33,7 +33,7 @@
 .sticky__fixed {
   position: fixed;
   left: 0; right: 0;
-  z-index: 1;
+  z-index: 2;
 }
 .sticky__placeholder {
   padding-top: 64px;

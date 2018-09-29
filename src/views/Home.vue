@@ -1,28 +1,28 @@
 <template>
   <div class="home">
-    <v-carousel hide-delimiters>
+    <v-carousel light hide-delimiters>
       <v-carousel-item cycle="false"
         v-for="(slide, i) in slides"
         :key="i"
       >
-        <img  v-for="(image, imgIndex) in slide"
-          :key="imgIndex"
-          :src="image.src" alt="" :style="'width: ' + imageWidth">
+        <a :href="image.src" v-for="(image, imgIndex) in slide" :key="imgIndex">
+          <img :src="image.src" alt="" :style="'width: ' + imageWidth">
+        </a>        
       </v-carousel-item>
     </v-carousel>
     <v-layout justify-center>
       <v-flex class="text-xs-center" lg9>
-        <h1 class="home__heading">
+        <h2 class="home__heading">
           Классический текст Lorem Ipsum, используемый с XVI века
-        </h1>
+        </h2>
         <p class="home__text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
           dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
-        <h1 class="home__heading">
+        <h2 class="home__heading">
           Абзац 1.10.32 "de Finibus Bonorum et Malorum", написанный Цицероном в 45 году н.э.
-        </h1>
+        </h2>
         <p class="home__text">
           Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore 
           veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia 
@@ -31,9 +31,9 @@
           nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea 
           voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
         </p>
-        <h1 class="home__heading">
+        <h2 class="home__heading">
           Английский перевод 1914 года, H. Rackham
-        </h1>
+        </h2>
         <p class="home__text">
           On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, 
           so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty 
@@ -60,7 +60,7 @@ export default {
           src: 'https://placeimg.com/420/315/any'
         },
         {
-          src: 'https://loremflickr.com/420/315'
+          src: 'https://placeimg.com/420/315/arch/sepia'
         },
         {
           src: 'https://placeimg.com/420/315/nature'
@@ -136,5 +136,8 @@ export default {
   .v-carousel {
     height: 490px;
   }
+}
+.home .v-btn:before {
+    background-color: #ecf2f9;
 }
 </style>
