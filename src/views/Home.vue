@@ -3,7 +3,7 @@
     <div class="z-slide-wrap top" id='slider'>
       <ul class="z-slide-content">
         <li class="z-slide-item" v-for="(slide, i) in slides" :key="i" >  
-          <a :href="image.src" v-for="(image, imgIndex) in slide" :key="imgIndex">
+          <a :href="image.src" v-for="(image, imgIndex) in slide" :key="imgIndex" @mousedown="setInitialCoords" @mouseup="ifDragged" @click="$event.preventDefault()">
             <img :src="image.src" alt="" :style="'width: ' + imageWidth">
           </a> 
         </li>
@@ -79,7 +79,8 @@ export default {
         {
           src: 'https://www.fillmurray.com/420/315'
         }        
-      ]
+      ],
+      initialLeftPos: 0
     };
   },
   computed: {
@@ -121,6 +122,18 @@ export default {
   },
   mounted() {
     this.slider = new Slider('#slider', '.z-slide-item');
+  },
+  methods: {
+    setInitialCoords(e) {
+      this.initialLeftPos = e.pageX - e.target.offsetWidth / 2;
+    },
+    ifDragged (e) {
+      if (e.pageX - e.target.offsetWidth / 2 === this.initialLeftPos) {
+        window.location = e.currentTarget.href;
+      } else {
+        e.preventDefault();
+      }
+    }
   }
 }
 </script>
