@@ -1,15 +1,14 @@
 <template>
   <div class="home">
-    <v-carousel light hide-delimiters>
-      <v-carousel-item cycle="false"
-        v-for="(slide, i) in slides"
-        :key="i"
-      >
-        <a :href="image.src" v-for="(image, imgIndex) in slide" :key="imgIndex">
-          <img :src="image.src" alt="" :style="'width: ' + imageWidth">
-        </a>        
-      </v-carousel-item>
-    </v-carousel>
+    <div class="z-slide-wrap top" id='slider'>
+      <ul class="z-slide-content">
+        <li class="z-slide-item" v-for="(slide, i) in slides" :key="i" >  
+          <a :href="image.src" v-for="(image, imgIndex) in slide" :key="imgIndex">
+            <img :src="image.src" alt="" :style="'width: ' + imageWidth">
+          </a> 
+        </li>
+      </ul>
+  </div>
     <v-layout justify-center>
       <v-flex class="text-xs-center" lg9>
         <h2 class="home__heading">
@@ -49,6 +48,8 @@
 </template>
 
 <script>
+import Slider from '../plugins/zSlider';
+
 export default {
   name: 'home',
   components: {
@@ -117,23 +118,24 @@ export default {
         case 'xl': return groupByAmount(this.images, 3);
       }
     }
+  },
+  mounted() {
+    this.slider = new Slider('#slider', '.z-slide-item');
   }
 }
 </script>
 <style>
-.v-carousel {
+@import url(../plugins/zSlider.css);
+.z-slide-content {
   height: 270px;
 }
-.v-responsive__content {
-  padding: 20px 0 0;
-}
 @media screen and (min-width: 600px)  {
-  .v-carousel {
+  .z-slide-content {
     height: 340px;
   }
 }
 @media screen and (min-width: 1904px)  {
-  .v-carousel {
+  .z-slide-content {
     height: 490px;
   }
 }
