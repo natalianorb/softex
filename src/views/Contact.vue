@@ -12,7 +12,7 @@
         ></v-text-field>
         <v-text-field
           v-model="phone"
-          validate-on-blur="true"
+          :validate-on-blur="true"
           :rules="phoneRules"
           mask="#(###)###-##-##"
           label="Phone"
@@ -33,6 +33,15 @@
           submit
         </v-btn>
       </v-form>
+      <div class="contact__success">
+        <v-dialog :value="isSuccess">
+          <v-card>
+            <div class="content__success-text">
+              Successfully submitted!
+            </div>
+          </v-card>
+        </v-dialog >
+      </div>
     </v-flex>
   </div>
 </div>
@@ -45,6 +54,7 @@ export default {
   store,
   data() {
     return {
+      isSuccess: false,
       valid: true,
       name: this.$store.state.contactForm.name,
       nameRules: [
@@ -88,6 +98,7 @@ export default {
         })
         //eslint-disable-next-line
         .then(body => {
+          this.isSuccess = true;
           this.$store.commit('updateContactForm', {
             name: this.name,
             phone: this.phone,
@@ -107,4 +118,7 @@ export default {
 </script>
 
 <style>
+.content__success-text {
+  padding: 16px 0;
+}
 </style>
