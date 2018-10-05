@@ -12,7 +12,9 @@
         ></v-text-field>
         <v-text-field
           v-model="phone"
+          validate-on-blur="true"
           :rules="phoneRules"
+          mask="#(###)###-##-##"
           label="Phone"
           required
         ></v-text-field>
@@ -52,7 +54,9 @@ export default {
       phone: '',
       phoneRules: [
         v => !!v || 'Phone is required',
-        v => /^((\+7|7|8)+([0-9]){10})$/.test(v) || 'Phone number must be valid'
+        v => {
+          let clearValue = v.replace(/\D/, '');
+          return /^((\+7|7|8)+([0-9]){10})$/.test(clearValue) || 'Phone number must be valid' }
       ],
       message: '',
       messageRules: [
